@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>门店管理系统</title>
+    <meta name="description" content="Exam Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link th:href="@{/public/css/page.css}" rel="stylesheet"/>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .right-panel {
+            height: 100%;
+            margin-top: 0;
+            padding-top: 55px;
+        }
+
+        .content {
+            /*height: 100%;*/
+            position: relative;
+        }
+
+        .site-footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 15px;
+            height: 3%;
+            margin-top: 35px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse" th:fragment="header :: copy">
+            <ul class="nav navbar-nav">
+                <li class=" dropdown">
+                    <a href="../shop/all">
+                        <i class="menu-icon fa fa-table"></i>门店管理
+                    </a>
+                </li>
+                <li class=" dropdown">
+                    <a href="../good/all">
+                        <i class="menu-icon fa fa-th"></i>商品管理
+                    </a>
+                </li>
+                <li class=" dropdown">
+                    <a href="../case/all">
+                        <i class="menu-icon fa fa-th-list"></i>案例管理
+                    </a>
+                </li>
+                <li class=" dropdown">
+                    <a href="../info/all">
+                        <i class="menu-icon fa fa-list"></i>资讯管理
+                    </a>
+                </li>
+                <li class=" dropdown">
+                    <a href="../poster/all">
+                        <i class="menu-icon fa fa-table"></i>海报管理
+                    </a>
+                </li>
+                <li class=" dropdown">
+                    <a href="../video/all">
+                        <i class="menu-icon fa fa-th"></i>视频管理
+                    </a>
+                </li>
+
+                <li class=" dropdown">
+                    <a href="../admin/myInfo">
+                        <i class="menu-icon fa fa-gear"></i>基本信息
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">获客系统企业端</a>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+
+
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle active"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       th:text="${session.admin.realName}">
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+
+                        <a class="nav-link" href="../admin/modifyPassword">
+                            <i class="fa fa- user"></i>修改密码 </a>
+                        <a class="nav-link" href="../admin/logout"><i class="fa fa- user"></i>退出
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="card" style="height: 100%;">
+            <div class="card-body">
+                <div>当前位置：案例管理</div>
+                <hr>
+                <div style="text-align: left;">
+                    <div class="col-sm-12" style="float: left;">
+                        <form action="all">
+                            <div style="float: left;">类型:&nbsp;</div>
+                            <div style="float: left;" class="col-md-2">
+                                <select name="caseType" class="form-control" data-th-placeholder="请选择"
+                                        style="height: 30px; font-size: 1px;">
+                                    <option th:if="${caseTypes.size()>0}" th:each="oaCaseType:${caseTypes}"
+                                            th:text="${oaCaseType.name}" th:value="${oaCaseType.id}">
+
+                                    </option>
+                                </select>
+                            </div>
+                            <div style="float: left; margin-right: 9px;">标题:</div>
+                            <div style="margin-right: 10px; float: left;" class="col-md-2">
+                                <input name="caseTitle" class="form-control" th:value="${caseTitle}"
+                                       style="height: 30px; font-size: 2px;">
+                            </div>
+                            <div style="margin-right: 7px; float: left;">
+                                <div style="float: left; margin-left: 20px;">
+                                    <input class="btn btn-primary btn-sm" type="submit"
+                                           value="查询"/>
+                                </div>
+                                <div style="float: left; margin-left: 5px;">
+                                    <a href="add" class="btn btn-primary  btn-sm"
+                                       style="margin-bottom: 10px;">新增</a>
+                                </div>
+                                <div style="float: left; margin-left: 5px;">
+                                    <a href="../caseType/all" class="btn btn-primary  btn-sm"
+                                       style="margin-bottom: 10px;">分类</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <div style="clear: both;"></div>
+                <div th:if="${cases.size()==0}" align="center" style="margin-top: 10px;">
+                    <div>
+									<span class="ti-receipt"
+                                          style="color: #00000036; font-size: 100px;"></span>
+                    </div>
+                    <div>
+                        <span color="#666">暂无案例</span>
+                    </div>
+                </div>
+
+                <div id="case" th:if="${cases.size()>0 }">
+                    <div th:if="${cases.size()>0 }" th:each="oaCase:${cases}">
+                        <div class="col-sm-3" style="float: left;">
+                            <div class="card" style="height:70%;">
+                                <div class="card-body">
+                                    <div style="margin-top: 10px;">
+                                        <img th:src="${oaCase.img}" style="height: 267px; width: 100%;"/>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <span th:text="${oaCase.type}"></span>
+                                        &nbsp;
+                                        <span th:text="${oaCase.title}"></span>
+                                    </div>
+
+                                    <div style="clear: both;"></div>
+
+                                    <div align="center" style="margin-top: 10px;">
+                                        <a class="btn btn-primary btn-sm" th:href="${oaCase.example}" target="_blank">
+                                            <i class="fa fa-link"> </i>查看</a>
+                                        <a class="btn btn-primary btn-sm" th:href="'modify/'+${oaCase.id}">
+                                            <i class="fa fa-edit"> </i> 修改</a>
+                                        <a class="btn btn-primary btn-sm" style="color: white;"
+                                           th:onclick="confirmDelete([[${oaCase.id}]])">
+                                            <i class="fa fa-trash-o"></i>删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div style="clear: both;"></div>
+                    <div id="pageDIv">
+                        <div class="col-md-6" style="float: left; text-align: right;line-height: 36px;">
+                            共
+                            <span th:text="${page.total}"></span>
+                            条数据， 当前为第
+                            <span th:text="${page.pageNum}"></span>
+                            页， 共
+                            <span th:text="${page.pages}"></span>
+                            页
+                        </div>
+                        <div class="col-md-6" style="float: right; text-align: left;">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+
+                                    <li><a th:href="'all?pageNum=1&caseTitle='+${caseTitle}+'&caseType='+${caseType}">&laquo;</a>
+                                    </li>
+                                    <li th:if="${page.hasPreviousPage}">
+                                        <a th:href="'all?pageNum='+${page.pageNum-1}+'&caseTitle='+${caseTitle}+'&caseType='${caseType}"
+                                           aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+                                        </a>
+                                    </li>
+
+                                    <li th:each="page_Num:${page.navigatepageNums }">
+                                        <a th:if="${page_Num == page.pageNum }" th:text="${page_Num}"></a>
+
+                                        <a th:if="${page_Num != page.pageNum }"
+                                           th:href="'all?pageNum='+${page_Num}+'&caseTitle='+${caseTitle}+'&caseType='+${caseType}"
+                                           th:text="${page_Num}"></a>
+                                    </li>
+
+                                    <li th:if="${page.hasNextPage}">
+                                        <a th:href="'all?pageNum='+${page.pageNum+1}+'&caseTitle='+${caseTitle}+'&caseType='${caseType}"
+                                           aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a th:href="'all?pageNum='+${page.pages}+'&caseTitle='+${caseTitle}+'&caseType='+${caseType}">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+
+    <!-- /.site-footer -->
+</div>
+<!-- /#right-panel -->
+
+<script src="../assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/plugins.js"></script>
+<script src="../assets/js/main.js"></script>
+<script type="text/javascript">
+    function confirmDelete(id) {
+        if (window.confirm("您确定要删除该案例吗？", "系统提示")) {
+            window.location.href = "./delete/" + id;
+        }
+
+    }
+</script>
+</body>
+</html>

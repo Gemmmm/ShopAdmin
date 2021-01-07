@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>门店管理系统</title>
+    <meta name="description" content="Exam Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../assets/css/themify-icons.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="../public/PicUpload/LXXUploadPic.css" rel="stylesheet"
+          type="text/css">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        .right-panel {
+            height: 100%;
+            margin-top: 0;
+            padding-top: 55px;
+        }
+
+        .content {
+            height: 100%;
+            position: relative;
+        }
+
+        .site-footer {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 15px;
+            height: 3%;
+            margin-top: 35px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- Left Panel -->
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default">
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class=" dropdown"><a href="../shop/all"> <i
+                        class="menu-icon fa fa-table"></i>门店管理
+                </a></li>
+                <li class=" dropdown"><a href="../good/all"> <i
+                        class="menu-icon fa fa-th"></i>商品管理
+                </a></li>
+                <li class=" dropdown"><a href="../case/all"> <i
+                        class="menu-icon fa fa-th-list"></i>案例管理
+                </a></li>
+                <li class=" dropdown"><a href="../info/all"> <i
+                        class="menu-icon fa fa-list"></i>资讯管理
+                </a></li>
+                <li class=" dropdown"><a href="../poster/all"> <i
+                        class="menu-icon fa fa-table"></i>海报管理
+                </a></li>
+                <li class=" dropdown"><a href="../video/all"> <i
+                        class="menu-icon fa fa-th"></i>视频管理
+                </a></li>
+
+                <li class=" dropdown"><a href="../admin/myInfo"> <i
+                        class="menu-icon fa fa-gear"></i>基本信息
+                </a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+</aside>
+<!-- /#left-panel -->
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <header id="header" class="header">
+        <div class="top-left">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">获客系统企业端</a>
+            </div>
+        </div>
+        <div class="top-right">
+            <div class="header-menu">
+
+
+                <div class="user-area dropdown float-right">
+                    <a href="#" class="dropdown-toggle active" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" th:text="${session.admin.realName}">
+                    </a>
+
+                    <div class="user-menu dropdown-menu">
+
+                        <a class="nav-link" href="../admin/modifyPassword"><i
+                                class="fa fa- user"></i>修改密码 </a> <a class="nav-link"
+                                                                     href="../admin/logout"><i class="fa fa- user"></i>退出
+                    </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+
+        <div class="card" style="height: 100%;">
+            <div class="card-body">
+                <div>当前位置：基本信息</div>
+
+                <hr>
+                <div class="col-sm-12" align="center" style="margin: auto;">
+                    <form id="form" method="POST" onsubmit="return checkForm(this)" enctype="multipart/form-data">
+
+                        <hidden name="id" class="form-control"/>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">用户名</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input name="username" th:value="${oaUser.username}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">联系人</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input name="realName" th:value="${oaUser.realName}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">手机号</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input name="phone" id="phone" maxlength="11" th:value="${oaUser.phone}"
+                                       onchange="verifyPhone()" class="form-control "/>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">品牌logo</label>
+                            </div>
+                            <div style="margin-left: 16px">
+                                <div style="float: left;" id="companyLogo"
+                                     th:LXXVal="${oaUser.companyLogo }" LXXCol="1" LXXRow="1"
+                                     LXXWidth="200" LXXHeight="200"></div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">营业执照</label>
+                            </div>
+                            <div style="margin-left: 16px">
+                                <div style="float: left;" id="licence"
+                                     th:LXXVal="${oaUser.licenseImg }" LXXCol="1" LXXRow="1"
+                                     LXXWidth="272" LXXHeight="388"></div>
+                                <div id="licenceing" style="float: left; margin-top: 171px">.</div>
+                            </div>
+
+                            <div th:if="${oaUser.licenseImg!=null}" style="margin-left: 5px;">
+                                <a target="_blank" href="${oaUser.licenseImg }"
+                                   style="margin-top: 171px" class="btn btn-primary btn-sm">查看</a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">注册编号</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="regNum" th:value="${oaUser.regNum}" name="regNum" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">公司名</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="company" th:value="${oaUser.company}" name="company" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">法人</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="person" th:value="${oaUser.person}" name="person" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">公司类型</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input name="type" id="type" th:value="${oaUser.type}" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">注册资本</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="capital" th:value="${oaUser.capital}" name="capital" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">地址</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="companyAddress" name="companyAddress" th:value="${oaUser.companyAddress}"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">经营范围</label>
+                            </div>
+                            <div class="col-md-11">
+									<textarea id="business" name="business" th:text="${oaUser.business}"
+                                              style="height:140px;" class="form-control  col-md-12 "/>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">身份证</label>
+                            </div>
+                            <div>
+                                <div id="cardFont" th:LXXVal="${oaUser.cardImgFont }"
+                                     style="float: left;" LXXCol="1" LXXRow="1" LXXWidth="259"
+                                     LXXHeight="165">.
+                                </div>
+
+                                <div id="cardBack" th:LXXVal="${oaUser.cardImgBack }"
+                                     style="float: left; margin-left: 30px;" LXXCol="1" LXXRow="1"
+                                     LXXWidth="259" LXXHeight="165"></div>
+                                <div id="cardFonting">.</div>
+                                <div id="cardBacking">.</div>
+
+                            </div>
+
+                            <div style="margin-left: 5px;" th:if="${oaUser.cardImgFont!=null}">
+                                <a target="_blank" href="${oaUser.cardImgFont }"
+                                   style="margin-top: 171px" class="btn btn-primary btn-sm">查看正面</a>
+                            </div>
+                            <div style="margin-left: 5px;"
+                                 th:if="${oaUser.cardImgBack !=null&&oaUser.cardImgBack.length()>0}">
+                                <a target="_blank" href="${oaUser.cardImgBack }"
+                                   style="margin-top: 171px" class="btn btn-primary btn-sm">查看反面</a>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">性别</label>
+                            </div>
+                            <div class="col-md-5">
+                                <select id="sex" name="sex" class="form-control ">
+                                    <option value="1" th:selected="${oaUser.sex==1}">男</option>
+                                    <option value="2" th:selected="${oaUser.sex==2}">女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">民族</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="nation" th:value="${oaUser.nation}" name="nation" class="form-control "/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">出生日期</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="birth"th:value="${oaUser.birth}"  name="birth" class="form-control  "/>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">身份证号</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="cardNum" name="cardNum" th:value="${oaUser.cardNum}"  class="form-control "
+                                       onchange="verifyCardNum()"/>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">住址</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="personAddress" name="personAddress" th:value="${oaUser.personAddress}"
+                                       class="form-control "/>
+                            </div>
+                        </div>
+
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">签发机关</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="authority" name="authority" class="form-control" th:value="${oaUser.authority}" />
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">有效期限</label>
+                            </div>
+                            <div class="col-md-5">
+                                <input id="validDate" name="validDate" class="form-control " th:value="${oaUser.validDate}" />
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">企业介绍</label>
+                            </div>
+                            <div class="col-md-11">
+                                <textarea name="intro" class="form-control " th:value="${oaUser.intro}" ></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class=" col-md-1">
+                                <label class=" form-control-label">无忧服务介绍</label>
+                            </div>
+                            <div class="col-md-11">
+                                <textarea name="serviceIntro" class="form-control " th:value="${oaUser.serviceIntro}" ></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <div align="center">
+                                <input type="submit" value="提交" class="btn btn-success btn-pad">
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- .animated -->
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+
+    <!-- /.site-footer -->
+</div>
+<!-- /#right-panel -->
+
+<script src="../assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/plugins.js"></script>
+<script src="../assets/js/main.js"></script>
+<script type="text/javascript" src="../public/ckeditor/ckeditor.js"></script>
+<script src="../assets/js/vendor/jquery-2.1.4.min.js"></script>
+<script src="../public/PicUpload/LXXUploadPic.js"></script>
+<script src="../public/js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+
+    function parseLicence() {
+        $("#licenceing").text("上传中。。。");
+        $.ajaxFileUpload({
+            url: './parseLicence', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: ['file'], //文件上传域的ID
+            dataType: 'json', //返回值类型 一般设置为json
+            success: function (data, status) {
+                //console.log("success:"+JSON.stringify(data));
+                $("#regNum").val(data.map["RegNum"]);
+                $("#regNum").val(data.map["Name"]);
+                $("#person").val(data.map["Person"]);
+                $("#type").val(data.map["Type"]);
+                $("#capital").val(data.map["Capital"]);
+                $("#companyAddress").val(data.map["Address"]);
+                $("#business").val(data.map["Business"]);
+                $("#setDate").val(data.map["SetDate"]);
+                $("#period").val(data.map["Period"]);
+                $("#licenceing").text("");
+            },
+            error: function (data, status, e) {
+                console.log("error:" + e);
+            }
+        });
+    }
+
+    function parseCardFont() {
+
+        $("#cardFonting").text("上传中。。。");
+        $.ajaxFileUpload({
+            url: './parseCardFont', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: ['cardFont'], //文件上传域的ID
+            dataType: 'json', //返回值类型 一般设置为json
+            success: function (data, status) {
+                //console.log("success:"+JSON.stringify(data));
+                console.log(data.map);
+                $("#personAddress").val(data.map["Address"]);
+                $("#birth").val(data.map["Birth"]);
+                $("#cardNum").val(data.map["IdNum"]);
+                $("#person").val(data.map["Name"]);
+                $("#nation").val(data.map["Nation"]);
+                if (data.map["Sex"] == "男") {
+                    $("#sex").val("1");
+                } else {
+                    $("#sex").val("2");
+                }
+                $("#cardFonting").text("");
+            },
+            error: function (data, status, e) {
+                console.log("error:" + e);
+            }
+        });
+    }
+
+    function parseCardBack() {
+        $("#cardBacking").text("上传中。。。");
+        $.ajaxFileUpload({
+            url: './parseCardBack', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: ['cardBack'], //文件上传域的ID
+            dataType: 'json', //返回值类型 一般设置为json
+            success: function (data, status) {
+                //console.log("success:"+JSON.stringify(data));
+                console.log(data.map);
+                $("#validDate").val(data.map["ValidDate"]);
+                $("#authority").val(data.map["Authority"]);
+                $("#cardBacking").text("");
+            },
+            error: function (data, status, e) {
+                console.log("error:" + e);
+            }
+        });
+    }
+
+    var intro = document.getElementById("intro");
+    CKEDITOR.replace(intro, {
+        filebrowserImageUploadUrl: "../file/uploadFile?type=other"
+    });
+    var serviceIntro = document.getElementById("serviceIntro");
+    CKEDITOR.replace(serviceIntro, {
+        filebrowserImageUploadUrl: "../file/uploadFile?type=other"
+    });
+
+    function checkForm(o) {
+        var re = /^(1[0-9]{10})$/;
+        if (!re.test(o.phone.value)) {
+            alert('请输入正确的手机号码。');
+            return false;
+        }
+        var length = o.cardNum.value.length;
+        if (length != 18) {
+            alert('请输入正确的身份证。');
+            return false;
+        }
+
+    }
+
+    function verifyPhone() {
+        var length = document.getElementById("phone").value.length;
+        if (length != 11) {
+            $("#phone").attr("class", "form-control    is-invalid")
+        } else if (length == 11) {
+            $("#phone").attr("class", "form-control  ")
+        }
+
+    }
+
+    function verifyCardNum() {
+        var length = document.getElementById("cardNum").value.length;
+        if (length != 18) {
+            $("#cardNum").attr("class", "form-control   is-invalid")
+        } else if (length == 18) {
+            $("#cardNum").attr("class", "form-control ")
+        }
+
+    }
+</script>
+</body>
+</html>

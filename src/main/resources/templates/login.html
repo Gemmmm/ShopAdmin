@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台登录页</title>
+    <link rel="shortcut icon" href="http://boss.tiancekj.com/Home/Index/login.html">
+    <link rel="stylesheet" href="../static/public/login/reset.css" th:href="@{/public/login/reset.css}">
+    <link rel="stylesheet" href="../static/public/login/app.css" th:href="@{/public/login/app.css}">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>html, * {
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+    }</style>
+    <style type="text/css">#htmlToothbrush #bodyToothbrush .parentToothbrush .bilibili-player-video {
+        margin: 0 !important;
+    }
+
+    #htmlToothbrush, #bodyToothbrush {
+        overflow: hidden !important;
+        zoom: 100% !important;
+    }
+
+    #htmlToothbrush #bodyToothbrush .parentToothbrush {
+        overflow: visible !important;
+        z-index: auto !important;
+        transform: none !important;
+        -webkit-transform-style: flat !important;
+        transition: none !important;
+        contain: none !important;
+    }
+
+    #htmlToothbrush #bodyToothbrush .absoluteToothbrush {
+        position: absolute !important;
+    }
+
+    #htmlToothbrush #bodyToothbrush .playerToothbrush {
+        position: fixed !important;
+        top: 0px !important;
+        left: 0px !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        z-index: 2147483646 !important;
+        border: none !important;
+        background-color: #000 !important;
+        transform: none !important;
+    }
+
+    #htmlToothbrush #bodyToothbrush .parentToothbrush video {
+        object-fit: contain !important;
+    }
+
+    #htmlToothbrush #bodyToothbrush .parentToothbrush .videoToothbrush {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+
+    #playerControlBtn {
+        text-shadow: none;
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        font: 12px "微软雅黑";
+        margin: 0;
+        width: 64px;
+        height: 20px;
+        line-height: 20px;
+        border: none;
+        text-align: center;
+        position: fixed;
+        z-index: 2147483647;
+        background-color: #27A9D8;
+        color: #FFF;
+    }
+
+    #playerControlBtn:hover {
+        visibility: visible;
+        opacity: 1;
+        background-color: #2774D8;
+    }
+
+    #picinpicBtn {
+        text-shadow: none;
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        font: 12px "微软雅黑";
+        margin: 0;
+        width: 53px;
+        height: 20px;
+        line-height: 20px;
+        border: none;
+        text-align: center;
+        position: fixed;
+        z-index: 2147483647;
+        background-color: #27A9D8;
+        color: #FFF;
+    }
+
+    #picinpicBtn:hover {
+        visibility: visible;
+        opacity: 1;
+        background-color: #2774D8;
+    }
+
+    #leftFullStackButton {
+        display: none;
+        position: fixed;
+        width: 1px;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: 2147483647;
+        background: #000;
+    }
+
+    #rightFullStackButton {
+        display: none;
+        position: fixed;
+        width: 1px;
+        height: 100vh;
+        top: 0;
+        right: 0;
+        z-index: 2147483647;
+        background: #000;
+    }
+
+    body {
+        background: url("[[@{/public/login/loginGg.jpg}]]");
+    }
+    </style>
+</head>
+<body>
+
+<div class="loginBox">
+    <a href="http://www.tiancekj.com/" target="_blank" class="logo1">
+        <img src="./public/login/logo.png" width="266" height="58">
+
+    </a>
+    <!-- 登录框 -->
+    <div class="login">
+        <div style="margin-bottom: 25px;">
+            <font style="width: 188px;height: 76px;color: #6165a2;font-size: 30px;">获客系统企业端</font>
+        </div>
+        <!-- <img src="./public/login/loginTil1.png" class="loginTil" width="188" height="76">
+         -->
+        <form method="post">
+            <div class="login_from">
+                <label>管理账号</label>
+                <div class="login_input">
+                    <span class="login_icon"></span>
+                    <input type="text" id="username" name="username" class="form_name"/>
+                </div>
+            </div>
+            <span class="tips tips1"></span>
+            <div class="login_from">
+                <label>密码</label>
+                <div class="login_input">
+                    <span class="login_icon login_icon1"></span>
+                    <input type="password" name="password" class="form_psd"/>
+                </div>
+            </div>
+            <span class="tips tips2"></span>
+            <span style="display:none;">120.27.251.67</span>
+            <!-- <input id="login_do" type="button" class="login_btn" value="登录" onclick="login()"> -->
+            <input id="login_do" type="submit" class="login_btn" value="登录">
+        </form>
+    </div>
+</div>
+<script src="./public/login/jquery-1.11.3.min.js"></script>
+<remove-web-limits-iqxin id="rwl-iqxin" class="rwl-exempt" style="position: fixed; top: 93px; left: 0px;">
+    <qxinbutton type="qxinbutton" id="rwl-setbtn"> set</qxinbutton>
+    <lalala style="cursor:move; font-size:12px;">限制解除</lalala>
+    <input type="checkbox" name="" id="black_node">
+    <style type="text/css">#rwl-iqxin {
+        position: fixed;
+        transform: translate(-95px, 0);
+        width: 85px;
+        height: 25px;
+        font-size: 12px;
+        font-weight: 500;
+        font-family: Verdana, Arial, '宋体';
+        color: #fff;
+        background: #333;
+        z-index: 2147483647;
+        margin: 0;
+        opacity: 0.05;
+        transition: 0.3s;
+        overflow: hidden;
+        user-select: none;
+        text-align: center;
+        white-space: nowrap;
+        line-height: 25px;
+        padding: 0 16px;
+        border: 1px solid #ccc;
+        border-width: 1px 1px 1px 0;
+        border-bottom-right-radius: 5px;
+        box-sizing: content-box;
+    }
+
+    #rwl-iqxin input {
+        margin: 0;
+        padding: 0;
+        vertical-align: middle;
+        -webkit-appearance: checkbox;
+        -moz-appearance: checkbox;
+        position: static;
+        clip: auto;
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    #rwl-iqxin.rwl-active-iqxin {
+        left: 0px;
+        transform: translate(0, 0);
+        opacity: 0.9;
+        height: 32px;
+        line-height: 32px
+    }
+
+    #rwl-iqxin label {
+        margin: 0;
+        padding: 0;
+        font-weight: 500;
+    }
+
+    #rwl-iqxin #rwl-setbtn {
+        margin: 0 4px 0 0;
+        padding: 0 0 0 4px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        background: #fff;
+        color: #000;
+    } </style>
+</remove-web-limits-iqxin>
+<script src="./public/login/app.js" th:src="@{/public/login/app.js}"></script>
+<script src="./public/login/base64.js" th:src="@{/public/login/base64.js}"></script>
+<script src="./public/login/rsa.js" th:src="@{/public/login/rsa.js}"></script>
+<script src="./public/login/jsencrypt.min.js" th:src="@{/public/login/jsencrypt.min.js}"></script>
+<script type="text/javascript">
+    // 提交
+    function login_to() {
+        var form_name = $.trim($('.form_name').val());
+        var form_psd = $.trim($('.form_psd').val());
+        if (form_name == '') {
+            $('.tips1').html('用户名不能为空');
+            return false;
+        } else if (form_psd == '') {
+            $('.tips1').html('');
+            $('.tips2').html('密码不能为空');
+            return false;
+        } else {
+            $('#login_sub').submit();
+        }
+    }
+
+    function login() {
+        var form_name = $.trim($('.form_name').val());
+        var form_psd = $.trim($('.form_psd').val());
+        if (form_name == '') {
+            $('.tips1').html('用户名不能为空');
+            return false;
+        } else if (form_psd == '') {
+            $('.tips1').html('');
+            $('.tips2').html('密码不能为空');
+            return false;
+        }
+
+        var sign = "sellername=" + form_name + "&password=" + form_psd;
+        $.ajax({
+            type: "post",
+            dataType: "json",
+            url: '/Home/Index/login_do',
+            data: 'sign=' + sign,
+            success: function (result) {
+                if (result.status == '200') {
+                    window.location.href = "/Home/Index/index";
+                } else {
+                    alert(result.msg);
+                }
+            }
+        })
+    }
+
+    /*$("body").keydown(function (enent) {
+        if (event.keyCode == "13") {
+            $('#login_do').click();
+        }
+    });*/
+</script>
+
+<tbdiv id="picinpicBtn"></tbdiv>
+<tbdiv id="playerControlBtn"></tbdiv>
+<tbdiv id="leftFullStackButton"></tbdiv>
+<tbdiv id="rightFullStackButton"></tbdiv>
+</body>
+</html>

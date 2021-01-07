@@ -1,0 +1,159 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>门店管理系统</title>
+<meta name="description" content="Exam Admin - HTML5 Admin Template">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="../../assets/css/themify-icons.css">
+<link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../assets/css/font-awesome.min.css">
+<link href="../../public/css/page.css" rel="stylesheet" />
+<link rel="stylesheet" href="../../assets/css/style.css">
+<link href="../../public/PicUpload/LXXUploadPic.css" rel="stylesheet" type="text/css"> 
+<style>
+	html,body {
+		height: 100%;
+	}
+	.right-panel {
+		height: 100%;
+		margin-top: 0;
+		padding-top: 55px;
+	}
+	.content {
+		height: 100%;
+		position: relative;
+	}
+	.site-footer {
+		position: absolute;
+	    left: 0;
+	    right: 0;
+	    bottom: 15px;
+	   height: 3%;
+	    margin-top: 35px;
+	}
+</style> 
+</head>
+
+<body>
+	<!-- Left Panel -->
+	<aside id="left-panel" class="left-panel">
+		<nav class="navbar navbar-expand-sm navbar-default">
+			<div id="main-menu" class="main-menu collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class=" dropdown"><a href="../../shop/all"> <i
+							class="menu-icon fa fa-table"></i>门店管理
+					</a></li>
+					<li class=" dropdown"><a href="../../good/all"> <i
+							class="menu-icon fa fa-th"></i>商品管理
+					</a></li>
+					<li class=" dropdown"><a href="../../case/all"> <i
+							class="menu-icon fa fa-th-list"></i>案例管理
+					</a></li>
+					<li class=" dropdown"><a href="../../info/all"> <i
+							class="menu-icon fa fa-list"></i>资讯管理
+					</a></li>
+					<li class=" dropdown"><a href="../../poster/all"> <i
+							class="menu-icon fa fa-table"></i>海报管理
+					</a></li>
+					<li class=" dropdown"><a href="../../video/all"> <i
+							class="menu-icon fa fa-th"></i>视频管理
+					</a></li>
+					
+					<li class=" dropdown"><a href="../../admin/myInfo"> <i
+							class="menu-icon fa fa-gear"></i>基本信息
+					</a></li>
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</nav>
+	</aside>
+	<!-- /#left-panel -->
+	<!-- Right Panel -->
+	<div id="right-panel" class="right-panel">
+		<!-- Header-->
+		<header id="header" class="header">
+			<div class="top-left">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">获客系统企业端</a> 
+				</div>
+			</div>
+			<div class="top-right">
+				<div class="header-menu">
+
+
+					<div class="user-area dropdown float-right">
+						<a href="../../#" class="dropdown-toggle active" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false" th:text="${session.admin.realName}">
+						</a>
+
+						<div class="user-menu dropdown-menu">
+
+							<a class="nav-link" href="../../admin/modifyPassword"><i
+								class="fa fa- user"></i>修改密码 </a> <a class="nav-link"
+								href="../../admin/logout"><i class="fa fa- user"></i>退出 </a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</header>
+		<!-- /#header -->
+		<!-- Content -->
+		<div class="content">
+			<!-- Animated -->
+			<div class="animated fadeIn">
+				<div  class="col-sm-12" align="center" style="margin: auto;">
+					<div class="card">
+						<div class="card-body">
+						<div style="text-align: left;margin-bottom: 21px;">当前位置：资讯管理&nbsp;/ &nbsp;分类管理</div>
+						
+							<form method="post" id="form"   >
+								<table class="table">
+								<tr>
+									<td>类别名称</td> 
+									<td>
+										<input name="name" th:value="${infoType.name}" class="form-control col-md-5"/>
+									</td> 
+								</tr>
+								<tr>
+									<td>是否展示</td> 
+									<td>
+										<select name="isShow" class="form-control col-md-5">
+											<option value="0" th:selected="${infoType.isShow==0}">不展示</option>
+											<option value="1" th:selected="${infoType.isShow==1}">展示</option>
+										</select>
+	
+									</td> 
+								</tr>
+								
+								
+								<tr>
+									<td colspan="2" align="center">
+										<input type="submit" value="提交" class="btn btn-success btn-pad">
+									</td> 
+								</tr>
+								</table>
+							
+							</form>
+						
+						</div>
+					</div>
+				</div>
+				
+				
+
+			</div>
+			<!-- .animated -->
+		<!-- Footer -->
+		<!-- /.site-footer -->
+		</div>
+		<!-- /.content -->
+		<div class="clearfix"></div>
+	</div>
+	<!-- /#right-panel -->
+</body>
+</html>
